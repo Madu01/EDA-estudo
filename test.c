@@ -1,29 +1,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
-    FILE *p;
-    FILE *pCopy;
-    char c;
-    char w;
-    p = fopen("test.txt", "r");
-    pCopy = fopen("testCopy.txt", "w");
-    if(p == NULL){
-        printf("erro, está vazio!");
-        exit(0);
-    }
-    while(1)
-    {
-        c = fgetc(p);
-        if (c == EOF)
+FILE *p;
+FILE *pCopy;
+
+char r[40];
+char w[40];
+char rd[40][100]; //coluna e linha
+char rdd[40];
+char *word;
+char **word1;
+
+int word2vec(char *pNomeTxtEntrada){
+    pCopy = fopen("text_Vocabulo.txt", "w");
+    int i = 0;
+    // while (1){
+
+    //     if (r == EOF){
+    //         break;
+    //         exit(0);
+    //     }
+    // }
+
+    //fclose(w);
+   
+}
+
+
+int main(int argc, char const *argv[]){
+    p = fopen("text.txt", "r");
+    int i = 0;
+    int j = 0;
+    while(1){
+        r[i] = fgetc(p);
+
+        if (r[i] == ' ')
         {
+            for (int j = 0; j < i; j++)
+            {
+                rd[j][k] = r[j];
+            }
+        }
+        
+        
+        if (r[i] == EOF){
             break;
-        }   
-        w = fputc(c, pCopy);
-        printf("%c", w);
+        }
+        i++;
     }
-    printf("\n");
-    fclose(p);
+
+    for (int j = 0; j < i; j++)
+    {
+        for (int k = 0; k < j; k++)
+        {
+            rd[j][k] = r[j];
+        }
+        
+    }
     
+
+    printf("%s \n", word);
+    
+    
+        
+        
+    
+    // }
+    //word2vec(rd);
+    // if(!word2vec(p) || p == NULL){
+    //     printf("Erro na geração do vocábulo!");
+    // };
+    fclose(p);
     return 0;
 }
