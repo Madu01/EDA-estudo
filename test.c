@@ -30,36 +30,33 @@ int word2vec(char *pNomeTxtEntrada){
 int main(int argc, char const *argv[]){
     p = fopen("text.txt", "r");
     int i = 0;
-    int j = 0;
     while(1){
         r[i] = fgetc(p);
 
-        if (r[i] == ' ')
-        {
-            for (int j = 0; j < i; j++)
-            {
-                rd[j][k] = r[j];
-            }
-        }
-        
-        
         if (r[i] == EOF){
             break;
         }
+        
         i++;
     }
 
-    for (int j = 0; j < i; j++)
+    for (int l = 0; l < i; l++)
     {
-        for (int k = 0; k < j; k++)
+    
+        if (r[l] == ' ')
         {
-            rd[j][k] = r[j];
+            for (int j = 0; j < i; j++)
+            {
+                rd[j][i] = r[j];
+            }
         }
-        
+    }
+    for (int l = 0; l < i; l++)
+    {
+        printf("%s \n",  rd);
     }
     
-
-    printf("%s \n", word);
+    
     
     
         
