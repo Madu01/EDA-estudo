@@ -38,6 +38,18 @@ int potencia(int A, int B, int stop){
     prodSumExe3 = A * potencia(A, B, stop);
 }
 
+// Exercicio 4
+// uma função recursiva que determine se uma string é um palíndromo (ou seja, se pode ser lida igualmente de trás para frente).
+int i = 0;
+void palindromo(char *p, char *pcopy){
+    if(p[i] == '\0') {
+        printf("%s", p);
+    }
+    i++;
+    palindromo(p+1);
+}
+
+
 int main(int argc, char const *argv[])
 {
     // Exercicio 1
@@ -66,6 +78,10 @@ int main(int argc, char const *argv[])
     //------------------------------------------------------
 
     // Exercicio 4
+    char *pString = "oie";
+    char *d;
+    palindromo(pString);
+    //printf("%s", d);
 
     
     return 0;
