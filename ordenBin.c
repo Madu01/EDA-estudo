@@ -11,36 +11,70 @@ struct para armazenar os dados da linha)
 
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+int countLine(FILE *p){
+    int tam = 0;
+    char c;
 
+    p = fopen("Lista_Municípios_com_IBGE_Brasil_Versao_CSV.csv", "r");
+    while (1){
+        c = fgetc(p);
+        if (c == '\n'){
+            tam++;
+        }
+        if (c == EOF){
+            break;
+        }
+    }
+    return tam;
+    fclose(p);
+}
 
-//void leArquiv()
+void putKeys(FILE *p, int *pk){
+    char c;
+    int count = 0;
+    p = fopen("Lista_Municípios_com_IBGE_Brasil_Versao_CSV.csv", "r");
+
+    while (1){
+        c = fgetc(p);
+    
+        if (count == 1){
+            if (c != 'I'){
+                *pk = c;
+                pk+1;
+                count = 0;
+            }
+            count = 0;
+        }
+        if (c == ';'){
+            count++;
+        }
+        
+        if (c == EOF){
+            break;
+        }
+    }
+    fclose(p);
+}
 
 int main(int argc, char const *argv[])
 {
     FILE *fileP;
-    int tam = 0;
-    char c[10000];
-    int qtdSep = 0;
+    int *pKey;
+    int lenLines = 0;
     // descobri tamanho:
- 
-    fileP = fopen("Lista_Municípios_com_IBGE_Brasil_Versao_CSV.csv", "r");
-    for (int i = 0; c[i] == c[10000] ; i++){
-        c[i] = fgetc(fileP);
-        if(c[i] == ';'){
-            qtdSep++;
-            if (qtdSep == 9)
-            {
-                tam++;
-            }
-            
-        }
-    }
- 
-    fclose(fileP);
-    printf("%d\n", tam);
+    lenLines = countLine(fileP);
+    //printf("%d\n", qtdLines);
 
+    pKey = (int*) malloc(sizeof(int)*lenLines);
+    putKeys(fileP, pKey);
+    for (int i = 0; i < lenLines; i++){
+        printf("%d\n", *pKey);
+        pKey++;
+    }
+    
+    
 
     return 0;
 }
-
